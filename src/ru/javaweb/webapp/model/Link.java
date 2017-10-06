@@ -18,15 +18,19 @@ public class Link {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Link)) return false;
 
         Link link = (Link) o;
 
-        return url != null ? url.equals(link.url) : link.url == null;
+        if (!name.equals(link.name)) return false;
+        if (url != null ? url.equals(link.url) : link.url == null) return true;
+        else return false;
     }
-
+    // хэш-код представляет собой уникальное число, которое идентифицирует объект
     @Override
     public int hashCode() {
-        return url != null ? url.hashCode() : 0;
+        int result = name.hashCode();
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        return result;
     }
 }
